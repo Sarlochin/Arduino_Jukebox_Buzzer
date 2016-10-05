@@ -3,7 +3,6 @@
  PublicInfo:
  Jukebox_Buzzer by Jan
  Project started: 10.11.2015
- Versions+Changes:
  Public: yes
  GitHub: https://github.com/Sarlochin/Arduino_Jukebox_Buzzer
  Publisher: Sarlochin
