@@ -14,7 +14,8 @@
 
 //Define the Pins
 const int Poti_Speed_pin = A7;
-const int buttonPin = 2;
+const int buttonPin = 2;  //Pin for Button
+int buttonstate = 0;
 
 #define ledPin1  13    //Pin for LED1
 #define ledPin2  12    //Pin for LED2
@@ -160,11 +161,12 @@ void loop()
 int zizeof_music = sizeof(StarWars_musiC) / sizeof(int);
 Serial.println(zizeof_music);
 //play_music (StarWars_musiC, StarWars_delayS, zizeof_music);
+
   
   switch(song)
   {
     case(0):
-    if(buttonPin == HIGH)
+    if(buttonstate = digitalRead(buttonPin) == HIGH)
     {
       song = 1;
     }
