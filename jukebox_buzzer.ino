@@ -137,9 +137,14 @@ const int Poti_Speed_pin = A7;
 
 int StarWars_musiC[] = {
   A4, A4, A4, F4, C5, A4, F4, C5, A4, pause, E5, E5, E5, F5, C5, GI4, F4, C5, A4, pause,   A5, A4, A4, A5, GI5, G5, FI5, F5, FI5, pause, AI4, DI5, D5, CI5, C5, B4, C5, pause,   F4, GI4, F4, A4, C5, A4, C5, E5, pause,    A5, A4, A4, A5, GI5, G5, FI5, F5, FI5, pause, AI4, DI5, D5, CI5, C5, B4, C5, pause, F4, GI4, F4, C5, A4, F4, C5, A4, pause};
-
 int StarWars_delayS[] = {
   500, 500, 500, 350, 150, 500, 350, 150, 650, 500, 500, 500, 500, 350, 150, 500, 350, 150, 650, 500,   500, 300, 150, 500, 325, 175, 125, 125, 250, 325, 250, 500, 325, 175, 125, 125, 250, 350,    250, 500, 350, 125, 500, 375, 125, 650, 500,    500, 300, 150, 500, 325, 175, 125, 125, 250, 325, 250, 500, 325, 175, 125, 125, 250, 350,    250, 500, 375, 125, 500, 375, 125, 650, 650};
+
+int Mario_Main_Theme_music[] = {
+  E7, E7, pause, E7, pause, C7, E7, pause, G7, pause, pause,  pause, G6, pause, pause, pause, C7, pause, pause, G6, pause, pause, E6, pause, pause, A6, pause, B6, pause, AI6, A6, pause, G6, E7, G7, A7, pause, F7, G7, pause, E7, pause, C7, D7, B6, pause, pause, C7, pause, pause, G6, pause, pause, E6, pause, pause, A6, pause, B6, pause, AI6, A6, pause, G6, E7, G7, A7, pause, F7, G7, pause, E7, pause, C7, D7, B6, pause, pause};
+
+int Mario_Main_Theme_delayS[] = { 
+  83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 111, 111, 111, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 111, 111, 111, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83};
 
 
 int song=0;
@@ -168,6 +173,9 @@ Serial.println(zizeof_music);
     song = 0;
     break;
     case(2):
+    play_music (Mario_Main_Theme_music, Mario_Main_Theme_delayS,zizeof_music);
+    song = 0;
+    break;
     default:
     song=0;
     
