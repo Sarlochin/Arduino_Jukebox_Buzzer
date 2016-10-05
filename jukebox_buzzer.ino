@@ -3,8 +3,9 @@
  PublicInfo:
  Jukebox_Buzzer by Jan
  Project started: 10.11.2015
+ Versions+Changes:
  Public: yes
- GitHub: n/a
+ GitHub: https://github.com/Sarlochin/Arduino_Jukebox_Buzzer
  Publisher: Sarlochin
 
  */
@@ -13,10 +14,7 @@
 #define delay_decrementer 100  //Decrease the timings by a fixed value to be able to speed up the music with the potentiometer
 
 //Define the Pins
-
-//#define inputPin A7    //Potentiometer connected to Analogue pin 7
-const int Poti_Speed_pin = A7;
-
+const int Poti_Speed_pin = A0;
 
 #define ledPin1  13    //Pin for LED1
 #define ledPin2  12    //Pin for LED2
@@ -144,15 +142,11 @@ int delayS[] = {
   500, 500, 500, 350, 150, 500, 350, 150, 650, 500, 500, 500, 500, 350, 150, 500, 350, 150, 650, 500,   500, 300, 150, 500, 325, 175, 125, 125, 250, 325, 250, 500, 325, 175, 125, 125, 250, 350,    250, 500, 350, 125, 500, 375, 125, 650, 500,    500, 300, 150, 500, 325, 175, 125, 125, 250, 325, 250, 500, 325, 175, 125, 125, 250, 350,    250, 500, 375, 125, 500, 375, 125, 650, 650};
 
 
-//int counter = 0;
-
 int size1 = sizeof(musiC) / sizeof(int);  //Size of the array to determine how many notes to play
 int size2 = sizeof(delayS) / sizeof(int);  //Debug only
 
 
 int poti_delay = 0;  //additional timing delay for the music
-
-bool enable = 0;
 
 void setup()
 {
@@ -184,27 +178,27 @@ void loop()
   for (int i = 0; i < size1; i++)   //play the music
   {
 
-    poti_delay = analogRead(Poti_Speed_pin) >> 2; //Read the delay value from the Potentiometer (returns value from 0-1023 converted to the range from 0-255)
+    poti_delay = ((analogRead(Poti_Speed_pin) >> 2)- delay_decrementer); //Read the delay value from the Potentiometer (returns value from 0-1023 converted to the range from 0-255)
 
-     Serial.println(poti_delay); //Debug only
+    Serial.println(poti_delay); //Debug only
 
 
     
-    tone(buzzerPin, musiC[i], (delayS[i] - delay_decrementer) + poti_delay);  //Playing the note with calculated duration
+    tone(buzzerPin, musiC[i], delayS[i] + poti_delay);  //Playing the note with calculated duration
 
 
-   // if (size1 % 2 == 0) //Switch between the LEDs every other note
-   // {
+    if (i % 2 == 0) //Switch between the LEDs every other note
+    {
       digitalWrite(ledPin1, HIGH);
-      delay((delayS[i] - delay_decrementer) + poti_delay);
+      delay(delayS[i] + poti_delay);
       digitalWrite(ledPin1, LOW);
-  //  } 
-  /*  else
+    } 
+    else
     {
       digitalWrite(ledPin2, HIGH);
       delay((delayS[i] - delay_decrementer) + poti_delay);
       digitalWrite(ledPin2, LOW);
-    }*/
+    }
 
     noTone(buzzerPin);  //Mute the Buzzer
 
