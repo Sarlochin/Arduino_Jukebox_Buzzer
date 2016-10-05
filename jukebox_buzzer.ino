@@ -169,8 +169,7 @@ Serial.println(zizeof_music);
     case(0):  //for selection purposes
     case(1):
     play_music (StarWars_musiC, StarWars_delayS,zizeof_music);
-    song = 0;
-    break;
+    //break;
     case(2):
     play_music (Mario_Main_Theme_music, Mario_Main_Theme_delayS,zizeof_music);
     song = 0;
