@@ -1,12 +1,11 @@
-/*
 
+/*
  PublicInfo:
  Jukebox_Buzzer by Jan
  Project started: 10.11.2015
  Public: yes
  GitHub: https://github.com/Sarlochin/Arduino_Jukebox_Buzzer
  Publisher: Sarlochin
-
  */
 
 
@@ -14,6 +13,7 @@
 
 //Define the Pins
 const int Poti_Speed_pin = A7;
+const int buttonPin = 2;
 
 #define ledPin1  13    //Pin for LED1
 #define ledPin2  12    //Pin for LED2
@@ -154,6 +154,7 @@ void setup()
   pinMode(buzzerPin, OUTPUT);  //Setting the input and output modes
   pinMode(ledPin1, OUTPUT);
   pinMode(ledPin2, OUTPUT);
+  pinMode(buttonPin, INPUT);
   Serial.begin(9600); //Debug only
   Serial.println("Setup finished"); //Debug only
 }
@@ -166,7 +167,12 @@ Serial.println(zizeof_music);
   
   switch(song)
   {
-    case(0):  //for selection purposes
+    case(0):
+    if(buttonPin == HIGH)
+    {
+      song = 1;
+    }
+    break;
     case(1):
     play_music (StarWars_musiC, StarWars_delayS,zizeof_music);
     song = 0;
