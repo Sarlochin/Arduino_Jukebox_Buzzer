@@ -166,7 +166,7 @@ Serial.println(zizeof_music);
   switch(song)
   {
     case(0):
-    if(buttonstate = digitalRead(buttonPin) == HIGH)
+    if(digitalRead(buttonPin) == HIGH)
     {
       song = 1;
     }
