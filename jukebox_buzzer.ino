@@ -14,7 +14,7 @@
 #define delay_decrementer 100  //Decrease the timings by a fixed value to be able to speed up the music with the potentiometer
 
 //Define the Pins
-const int Poti_Speed_pin = A0;
+const int Poti_Speed_pin = A7;
 
 #define ledPin1  13    //Pin for LED1
 #define ledPin2  12    //Pin for LED2
@@ -135,18 +135,14 @@ const int Poti_Speed_pin = A0;
 
 //Arrays for music and timings: StarWars Imperial March
 
-int musiC[] = {
+int StarWars_musiC[] = {
   A4, A4, A4, F4, C5, A4, F4, C5, A4, pause, E5, E5, E5, F5, C5, GI4, F4, C5, A4, pause,   A5, A4, A4, A5, GI5, G5, FI5, F5, FI5, pause, AI4, DI5, D5, CI5, C5, B4, C5, pause,   F4, GI4, F4, A4, C5, A4, C5, E5, pause,    A5, A4, A4, A5, GI5, G5, FI5, F5, FI5, pause, AI4, DI5, D5, CI5, C5, B4, C5, pause, F4, GI4, F4, C5, A4, F4, C5, A4, pause};
 
-int delayS[] = {
+int StarWars_delayS[] = {
   500, 500, 500, 350, 150, 500, 350, 150, 650, 500, 500, 500, 500, 350, 150, 500, 350, 150, 650, 500,   500, 300, 150, 500, 325, 175, 125, 125, 250, 325, 250, 500, 325, 175, 125, 125, 250, 350,    250, 500, 350, 125, 500, 375, 125, 650, 500,    500, 300, 150, 500, 325, 175, 125, 125, 250, 325, 250, 500, 325, 175, 125, 125, 250, 350,    250, 500, 375, 125, 500, 375, 125, 650, 650};
 
 
-int size1 = sizeof(musiC) / sizeof(int);  //Size of the array to determine how many notes to play
-int size2 = sizeof(delayS) / sizeof(int);  //Debug only
-
-
-int poti_delay = 0;  //additional timing delay for the music
+int song=0;
 
 void setup()
 {
@@ -154,58 +150,65 @@ void setup()
   pinMode(buzzerPin, OUTPUT);  //Setting the input and output modes
   pinMode(ledPin1, OUTPUT);
   pinMode(ledPin2, OUTPUT);
+  Serial.begin(9600); //Debug only
+  Serial.println("Setup finished"); //Debug only
+}
 
-
-   Serial.begin(9600); //Debug only
-
-  if (size1 != size2)
+void loop()
+{
+int zizeof_music = sizeof(StarWars_musiC) / sizeof(int);
+Serial.println(zizeof_music);
+//play_music (StarWars_musiC, StarWars_delayS, zizeof_music);
+  
+  switch(song)
   {
-    Serial.println("Warning Size mismatch"); //Debug only
-  } 
-  else {
-    Serial.println("Size Match"); //Debug only
-    Serial.println(size1); //Debug only
-    Serial.println(size2); //Debug only
-    Serial.println("Setup Compleate"); //Debug only
+    case(0):  //for selection purposes
+    case(1):
+    play_music (StarWars_musiC, StarWars_delayS,zizeof_music);
+    song = 0;
+    break;
+    case(2):
+    default:
+    song=0;
+    
   }
 
 
 }
 
-void loop()
+void play_music (int musiC[], int delayS[], int music_length)
 {
-
-  for (int i = 0; i < size1; i++)   //play the music
+  int delay_value=0; 
+  
+  for (int i = 0; i < music_length; i++)   //play the music
   {
+   
+    delay_value =(delayS[i] + ((analogRead(Poti_Speed_pin) >> 2)- delay_decrementer)); //Read the delay value from the Potentiometer (returns value from 0-1023 converted to the range from 0-255)
 
-    poti_delay = ((analogRead(Poti_Speed_pin) >> 2)- delay_decrementer); //Read the delay value from the Potentiometer (returns value from 0-1023 converted to the range from 0-255)
-
-    Serial.println(poti_delay); //Debug only
-
-
+    if(delay_value<=10)
+    {delay_value=10;}
+   
     
-    tone(buzzerPin, musiC[i], delayS[i] + poti_delay);  //Playing the note with calculated duration
+    tone(buzzerPin, musiC[i], delay_value);  //Playing the note with calculated duration
 
 
     if (i % 2 == 0) //Switch between the LEDs every other note
     {
       digitalWrite(ledPin1, HIGH);
-      delay(delayS[i] + poti_delay);
+      delay(delay_value);
       digitalWrite(ledPin1, LOW);
     } 
     else
     {
       digitalWrite(ledPin2, HIGH);
-      delay((delayS[i] - delay_decrementer) + poti_delay);
+      delay(delay_value);
       digitalWrite(ledPin2, LOW);
     }
 
     noTone(buzzerPin);  //Mute the Buzzer
 
-    delay(50);
+    delay(delay_value>>3);
 
   }
-
-
-
+  
 }
