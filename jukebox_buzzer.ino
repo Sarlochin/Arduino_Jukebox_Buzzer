@@ -221,8 +221,16 @@ int Pirate_Of_The_Caribbean_musiC [] = {
   A5, C6, D6, D6, D6, E6, G6, G6, G6, A6, AI6, AI6, A6, G6, A6, D6, pause, //Line 7
   D6, E6, F6, F6, F6, G6, D6, pause,  //Line 8
   D6, F6, E6, E6, D6, CI6, D6, D6, E6, F6, F6, G6, A6, pause, //Line 9
+<<<<<<< HEAD
   pause, E6, G6, A6, A6, A6
 };
+=======
+  pause, E6, G6, A6, A6, A6, AI6, A6, pause, pause, //Line 10
+  G6, G6, G6, G6, A6, pause, pause, A6, A6, A6, AI6, A6, pause, pause, G6, F6, E6, D6, pause, //Line 11
+  D5, E5, F5, G5, A5, G5, F5, E5, F5, G5, A5, G5, pause, F5, G5, A5, G5, F5, //Line 12
+  E5, F5, E5, D5, C5, D5, pause, D6, E6, F6, E6, F6, G6, F6, G6,
+  };
+>>>>>>> origin/master
 
 int Pirate_Of_The_Caribbean_delayS [] = {
   e, e, q, q, e, e, q, q, e, e, q, q, e, e, e, e, q, //Line 1
