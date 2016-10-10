@@ -296,6 +296,7 @@ int Pirates_Of_The_Caribbean_delayS [] = {
 
 
 int song = 0;
+int prev_song = 0;
 
 void setup()
 {
@@ -329,9 +330,12 @@ void loop()
 
   if (digitalRead(start_button_Pin) == HIGH)
   {
-    song = random(1, 7);
-    Serial.print("Song= ");
-    Serial.println(song);
+    song = prev_song;
+    while (song == prev_song)
+    {
+      song = random(1, 7);
+    }
+    prev_song = song;
   }
 
   switch (song)
@@ -368,7 +372,7 @@ void loop()
 
       Serial.println("Song 2: Mario Main Theme");
       print_number_on_segment_display (song);
-      
+
       sizeof_music = sizeof(Mario_Main_Theme_music) / sizeof(int);
       while ((!return_of_play_music))
       {
@@ -391,7 +395,7 @@ void loop()
 
       Serial.println("Song 3: Mario Starman Theme");
       print_number_on_segment_display (song);
-      
+
       sizeof_music = sizeof(Mario_Starman_Theme_musiC) / sizeof(int);
       while ((!return_of_play_music))
       {
@@ -415,7 +419,7 @@ void loop()
 
       Serial.println("Song 4: Axel F");
       print_number_on_segment_display (song);
-      
+
       sizeof_music = sizeof(Axel_F_musiC) / sizeof(int);
       while ((!return_of_play_music))
       {
@@ -439,7 +443,7 @@ void loop()
 
       Serial.println("Song 5: Davy Jones Theme");
       print_number_on_segment_display (song);
-      
+
       sizeof_music = sizeof(Davy_Jones_musiC) / sizeof(int);
       while ((!return_of_play_music))
       {
@@ -463,7 +467,7 @@ void loop()
 
       Serial.println("Song 6: Pirates of the Caribbean Theme");
       print_number_on_segment_display (song);
-      
+
       sizeof_music = sizeof(Pirates_Of_The_Caribbean_musiC ) / sizeof(int);
       while ((!return_of_play_music))
       {
@@ -539,4 +543,3 @@ int play_music (int musiC[], int delayS[], int music_length)
 
 
 }
-
