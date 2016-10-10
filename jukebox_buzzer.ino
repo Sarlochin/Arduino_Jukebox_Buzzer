@@ -22,10 +22,15 @@
 #define using_segment_display 0
 
 
-#define delay_decrementer 50  //Decrease the timings by a fixed value to be able to speed up the music with the potentiometer
+#define minimal_Delay_value 60
+#define maximal_Delay_value 200
+
+#define minimal_Pitch_value -4
+#define maxiaml_Pitch_value 3
 
 //Define the Pins
 const int Poti_Speed_pin = A7;
+const int Poti_Pitch_pin = A6;
 const int start_button_Pin = 2;  //Pin for Start Button
 const int stop_button_Pin = 3;
 const int next_song_button_Pin = 5;
@@ -497,9 +502,16 @@ int play_music (int musiC[], int delayS[], int music_length)
 {
   unsigned long current_delaytime = millis();
   int note_duration = 0;
+  int oktave = 0;
+  int bpm = 0;
+  int note_pitch = 0;
   int delay_between_notes = 0;
 
-  note_duration = (delayS[current_note] + ((analogRead(Poti_Speed_pin) >> 2) - delay_decrementer)); //Read the delay value from the Potentiometer (returns value from 0-1023 converted to the range from 0-255)
+  // note_duration = (delayS[current_note] + ((analogRead(Poti_Speed_pin) >> 2) - delay_decrementer)); //Read the delay value from the Potentiometer (returns value from 0-1023 converted to the range from 0-255)
+
+  bpm = map((analogRead(Poti_Speed_pin)), 0, 1023, minimal_Delay_value, maximal_Delay_value);
+
+  note_duration = (bpm / 60) * delayS[current_note];
 
   if (note_duration <= 10)
   {
@@ -508,10 +520,35 @@ int play_music (int musiC[], int delayS[], int music_length)
 
   delay_between_notes = (note_duration + (note_duration >> 3));
 
+/* Currently not Working
+
+  oktave = map((analogRead(Poti_Pitch_pin)), 0, 1023, minimal_Pitch_value, maxiaml_Pitch_value);
+
+  Serial.print("OKTAVE = ");
+  Serial.println(oktave);
+
+
+  note_pitch = musiC[current_note] + (oktave * 260);
+
+  if (note_pitch <= 16)
+  {
+    note_pitch = 16;
+  }
+
+  if (note_pitch >= 7902)
+  {
+    note_pitch = 7902;
+  }
+
+  Serial.print("Pitch = ");
+  Serial.println(note_pitch);
+*/
+
+
   if (!tone_marker)
   {
     tone_marker = 1;
-    tone(buzzerPin, musiC[current_note], note_duration);  //Playing the note with calculated duration
+    tone(buzzerPin, musiC[current_note] , note_duration);  //Playing the note with calculated duration
   }
 
   if (current_delaytime - previous_delaytime >= delay_between_notes)
