@@ -21,6 +21,8 @@ int current_note = 0;
 bool tone_marker = 0;
 unsigned long previous_delaytime = 0;
 
+int return_of_play_music = 0;
+
 
 #define ledPin1  13    //Pin for LED5
 #define ledPin2  12    //Pin for LED2
@@ -149,49 +151,112 @@ unsigned long previous_delaytime = 0;
 #define s 63
 
 
-//Arrays for music and timings: StarWars Imperial March
-
+//Star Wars Imperial March
 int StarWars_musiC[] = {
-  A4, A4, A4, F4, C5, A4, F4, C5, A4, pause, E5, E5, E5, F5, C5, GI4, F4, C5, A4, pause,
-  A5, A4, A4, A5, GI5, G5, FI5, F5, FI5, pause, AI4, DI5, D5, CI5, C5, B4, C5, pause,
-  F4, GI4, F4, A4, C5, A4, C5, E5, pause,
-  A5, A4, A4, A5, GI5, G5, FI5, F5, FI5, pause, AI4, DI5, D5, CI5, C5, B4, C5, pause,
-  F4, GI4, F4, C5, A4, F4, C5, A4, pause
-};
+  0, A4, A4, A4, F4, C5, A4, F4, C5, A4, pause, E5, E5, E5, F5, C5, GI4, F4, C5, A4, pause,   
+  A5, A4, A4, A5, GI5, G5, FI5, F5, FI5, pause, AI4, DI5, D5, CI5, C5, B4, C5, pause,   
+  F4, GI4, F4, A4, C5, A4, C5, E5, pause,    
+  A5, A4, A4, A5, GI5, G5, FI5, F5, FI5, pause, AI4, DI5, D5, CI5, C5, B4, C5, pause, 
+  F4, GI4, F4, C5, A4, F4, C5, A4, pause};
 
 int StarWars_delayS[] = {
-  500, 500, 500, 350, 150, 500, 350, 150, 650, 500, 500, 500, 500, 350, 150, 500, 350, 150, 650, 500,
-  500, 300, 150, 500, 325, 175, 125, 125, 250, 325, 250, 500, 325, 175, 125, 125, 250, 350,
-  250, 500, 350, 125, 500, 375, 125, 650, 500,
-  500, 300, 150, 500, 325, 175, 125, 125, 250, 325, 250, 500, 325, 175, 125, 125, 250, 350,
-  250, 500, 375, 125, 500, 375, 125, 650, 650
-};
-/*
-  int Mario_Main_Theme_music[] = {
-  E7, E7, pause, E7, pause, C7, E7, pause, G7, pause, pause,  pause, G6, pause, pause, pause, C7, pause, pause, G6, pause, pause, E6, pause, pause, A6, pause, B6, pause, AI6, A6, pause, G6, E7, G7, A7, pause, F7, G7, pause, E7, pause, C7, D7, B6, pause, pause, C7, pause, pause, G6, pause, pause, E6, pause, pause, A6, pause, B6, pause, AI6, A6, pause, G6, E7, G7, A7, pause, F7, G7, pause, E7, pause, C7, D7, B6, pause, pause};
+  0, 500, 500, 500, 350, 150, 500, 350, 150, 650, 500, 500, 500, 500, 350, 150, 500, 350, 150, 650, 500,   
+  500, 300, 150, 500, 325, 175, 125, 125, 250, 325, 250, 500, 325, 175, 125, 125, 250, 350,    
+  250, 500, 350, 125, 500, 375, 125, 650, 500,    
+  500, 300, 150, 500, 325, 175, 125, 125, 250, 325, 250, 500, 325, 175, 125, 125, 250, 350,    
+  250, 500, 375, 125, 500, 375, 125, 650, 650};
 
-  int Mario_Main_Theme_delayS[] = {
-  83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 111, 111, 111, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 111, 111, 111, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 500};*/
 
-/*int Mario_Starman_Theme_musiC[] = {
-  F5, F5, F5, D5, F5, pause, F5, D5, F5, D5, F5, E5, E5, E5, C5, E5, pause, E5, C5, E5, C5, E5, F5, F5, F5, D5, F5, pause, F5, D5, F5, D5, F5, E5, E5, E5, C5, E5, pause, E5, C5, E5, C5, E5, F5, F5, F5, D5, F5, pause, F5, D5, F5, D5, F5, E5, E5, E5, C5, E5, pause, E5, C5, E5, C5, E5, pause};
+//Mario Main Music
+int Mario_Main_Theme_music[] = {
+  0, 7, E7, pause, E7, pause, C7, E7, pause, G7, pause, pause,  pause, G6, pause, pause, pause, C7, pause, pause, G6, pause, pause, E6, pause, pause, A6, pause, B6, pause, AI6, A6, pause, G6, E7, G7, A7, pause, F7, G7, pause, E7, pause, C7, D7, B6, pause, pause, C7, pause, pause, G6, pause, pause, E6, pause, pause, A6, pause, B6, pause, AI6, A6, pause, G6, E7, G7, A7, pause, F7, G7, pause, E7, pause, C7, D7, B6, pause, pause};
 
-  int Mario_Starman_Theme_delayS[] = {
-  100, 100, 100, 50, 100, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 50, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 100, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 50, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 100, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 50, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 100, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 50, 50, 100, 50, 50, 50, 100, f};
-*/
+int Mario_Main_Theme_delayS[] = { 
+  0, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 111, 111, 111, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 111, 111, 111, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83, 83};
+
+//Mario StarmanTheme
+int Mario_Starman_Theme_musiC[] = {
+  0, F5, F5, F5, D5, F5, pause, F5, D5, F5, D5, F5, E5, E5, E5, C5, E5, pause, E5, C5, E5, C5, E5, F5, F5, F5, D5, F5, pause, F5, D5, F5, D5, F5, E5, E5, E5, C5, E5, pause, E5, C5, E5, C5, E5, F5, F5, F5, D5, F5, pause, F5, D5, F5, D5, F5, E5, E5, E5, C5, E5, pause, E5, C5, E5, C5, E5, pause};
+
+int Mario_Starman_Theme_delayS[] = {
+  0, 100, 100, 100, 50, 100, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 50, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 100, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 50, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 100, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 50, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 100, 50, 100, 50, 50, 50, 100, 100, 100, 100, 50, 50, 50, 100, 50, 50, 50, 100, f};
+
+
+//Axel F
+int Axel_F_musiC[] = {
+  0, F5, pause, GI5, pause, F5, F5, AI5, F5, DI5, F5, pause, C6, pause, F5, F5, CI6, C6, GI5, F5, C6, F6, F5, DI5, DI5, C5, G5, F5, pause, //Line 1 high voice
+  F5, pause, GI5, pause, F5, F5, AI5, F5, DI5, F5, pause, C6, pause, F5, F5, CI6, C6, GI5, F5, C6, F6, F5, DI5, DI5, C5, G5, F5, pause, //Line 2 high voice
+  F3, pause, F4, pause, DI4, DI5, C4, C5, DI5, F3, pause, F4, pause, pause, C3, C4, DI4, F4, CI3, pause, CI4, pause, DI3, DI4, C3, C4, DI4, F4, F3, pause, pause, DI4, C4, B3, GI3,  //Line 3 low voice
+  F3, pause, F4, pause, DI4, DI5, C4, C5, DI5, F3, pause, F4, pause, pause, C3, C4, DI4, F4, CI3, pause, CI4, pause, DI3, DI4, C3, C4, DI4, F4, F3, pause, pause}; //Line 4 low voice
+
+int Axel_F_delayS[] = {
+  0, e, e, e, s, e, s, e, e, e, e, e, e, s, e, s, e, e, e, e, e, e, s, e, s, e, e, h, h,  //Line 1 high voice
+  e, e, e, s, e, s, e, e, e, e, e, e, s, e, s, e, e, e, e, e, e, s, e, s, e, e, h, h,  //Line 2 high voice
+  e, e, e, s, e, s, e, e, e, e, e, e, e, s, s, e, e, e, e, e, e, s, e, s, e, e, e, e, e, q, s, e, s, e, e,  //Line 3 low voice  
+  e, e, e, s, e, s, e, e, e, e, e, e, e, s, s, e, e, e, e, e, e, s, e, s, e, e, e, e, e, q, f}; //Line 4 low voice
+
+
+//Davy Jones Theme
 int Davy_Jones_musiC[] = {
   0, D5, E5, F5, G5, A5, AI5, A5, D5, //Line 1
   A5, AI5, C6, D6, A5, G5, A5, pause, AI5, C6, A5, F5, G5, A5, F5, D5, E5, C5, A4, E5, D5, //Line 2
   D5, pause, E5, FI5, G5, A5, B5, C6, B5, E5, B5, C6, D6, E6, B5, A5, B5, C6, D6, //Line 3
-  B5, G5, A5, B5, G5, E5, FI5, D5, B4, FI5, E5, E5, pause
-}; //Line 4
+  B5, G5, A5, B5, G5, E5, FI5, D5, B4, FI5, E5, E5, pause}; //Line 4
 
-int Davy_Jones_delayS[] = {
+ int Davy_Jones_delayS[] = {
   0, h, q, h, q, h, q , h, q, //Line 1
   h, q, h, q, h, q, h, q, h, q, h, q, h, q, h, q, h, q, h, q, hq, //Line 2
   h, q, h, q, h, q, h, q, h, q, h, q, h, q, h, q, hq, h, q, //Line 3
-  h, q, h, q, h, q, h, q, h, q, hq, h, f
-}; //Line 4
+  h, q, h, q, h, q, h, q, h, q, hq, h, f}; //Line 4 
+  
+  
+  //Pirates of the Caribbean Theme
+int Pirates_Of_The_Caribbean_musiC [] = {
+  0, A4, C5, D5, D5, D5, E5, F5, F5, F5, G5, E5, E5, D5, C5, C5, D5, pause, //Line 1
+  A4, C5, D5, D5, D5, E5, F5, F5, F5, G5, E5, E5, D5, C5, D5, pause, //Line 2
+  A4, C5, D5, D5, D5, F5, G5, G5, G5, A5, AI5, AI5, A5, G5, A5, D5, pause, //Line 3
+  D5, E5, F5, F5, G5, A5, D5, pause, D5, F5, E5, E5, F5, D5, E5, pause, //Line 4
+
+  A5, C6, D6, D6, D6, E6, F6, F6, F6, G6, E6, E6, D6, C6, C6, D6, pause, //Line 5
+  A5, C6, D6, D6, D6, E6, F6, F6, F6, G6, E6, E6, D6, C6, D6, pause,  //Line 6
+  A5, C6, D6, D6, D6, F6, G6, G6, G6, A6, AI6, AI6, A6, G6, A6, D6, pause, //Line 7
+  D6, E6, F6, F6, G6, A6, D6, pause,  //Line 8
+  D6, F6, E6, E6, D6, CI6, D6, D6, E6, F6, F6, G6, A6, pause, //Line 9
+  pause, F6, E6, A5, pause, AI6, pause, F6, D6, //Line 10
+  AI5, pause, E5, pause, F5, pause, F5, pause, E6, G6, A6, A6, A6, AI6, A6, pause, //Line 11 
+  G6, G6, G6, G6, A6, pause, A6, A6, A6, AI6, A6, pause, G6, F6, E6, D6, pause, //Line 12
+  D5, E5, F5, G5, A5, G5, F5, E5, F5, G5, A5, G5, pause, F5, G5, A5, G5, F5, //Line 13
+  E5, F5, E5, D5, C5, D5, pause, D6, E6, F6, E6, F6, G6, F6, G6, //Line 14
+  A6, G6, F6, D6, pause, D6, E6, F6, G6, A6, AI6, D6, G6, F6, G6, E6, D6, E6, CI6, //Line 15
+  A6, pause, AI6, pause, A6, A6, A6, A6, G6, pause, G6, pause, F6, pause, //Line 16
+  E6, F6, E6, E6, D6, pause, D6, E6, F6, A6, pause, D6, E6, F6, AI6, pause, D6, E6, F6, A6, A6, C7, //Line 17
+  A6, G6, pause, G6, pause, F6, pause, E6, F6, E6, D6 //Line 18
+  };
+
+int Pirates_Of_The_Caribbean_delayS [] = {
+  0, e, e, q, q, e, e, q, q, e, e, q, q, e, e, e, e, q, //Line 1
+  e, e, q, q, e, e, q, q, e, e, q, q, e, e, q, q, //Line 2
+  e, e, q, q, e, e, q, q, e, e, q, q, e, e, e, e, q,  //Line 3
+  e, e, q, q, q, e, e, q, e, e, q, q, e, e, q, q, //Line 4
+
+  e, e, q, q, e, e, q, q, e, e, q, q, e, e, e, e, q, //Line 5
+  e, e, q, q, e, e, q, q, e, e, q, q, e, e, q, q, //Line 6
+  e, e, q, q, e, e, q, q, e, e, q, q, e, e, e, e, q, //Line 7
+  e, e, q, q, q, e, e, q,  //Line 8
+  e, e, q, q, e, e, q, q , q, q, q, q, q, q, //Line 9
+  e, s, s, q, h, q, qe, e, e, //Line 10
+  q, h, q, e, q, e, q, qe, s, s, q, q, q, s, s, h, //Line 11
+  q, q, q, s, s, h, q, q, q, s, s, h, q, q, q, q, q, //Line 12
+  e, e, h, e, e, q, q, q, q, q, q, qe, e, e, e, h, e, e, //Line 13
+  q, q, q, h, q, qe, e, e, e, h, e, e, q, q, q, //Line 14
+  q, q, q, qe, e, e, e, q, q, q, q, q, q, qe, e, q, qe, e, q, //Line 15
+  q, h, q, h, q, q, q, e, e, h, q, h, q, h, //Line 16
+  q, q, q, s, s, q, e, e, e, q, e, e, e, e, q, e, e, e, e, q, q, q, //Line 17
+  s, s, h, q, h, q, h, q, q, q, hq //Line 18
+  };
+  
+  
+
 
 
 int song = 0;
@@ -208,15 +273,13 @@ void setup()
   Serial.println("Setup finished"); //Debug only
 }
 
-int testmarker = 0;
-
 void loop()
 {
   int sizeof_music = 0;
 
   if (digitalRead(start_button_Pin) == HIGH)
   {
-    song = random(1,3);
+    song = random(1,7);
     Serial.print("Song= ");
     Serial.println(song);
   }
@@ -224,19 +287,18 @@ void loop()
   switch (song)
   {
     case (0):
-    Serial.println("Case 0");
-    testmarker=0;
+    return_of_play_music=0;
     current_note=0;
       break;
 
     case (1):
 
-      Serial.println("Song 1");
-      sizeof_music = sizeof(Davy_Jones_musiC) / sizeof(int);
-      while ((!testmarker))
+      Serial.println("Song 1: Star Wars");
+      sizeof_music = sizeof(StarWars_musiC) / sizeof(int);
+      while ((!return_of_play_music))
       {
-        testmarker = play_music (Davy_Jones_musiC, Davy_Jones_delayS, sizeof_music);
-        if (testmarker)
+        return_of_play_music = play_music (StarWars_musiC, StarWars_delayS, sizeof_music);
+        if (return_of_play_music)
         {
           song = 0;
           break;
@@ -246,12 +308,75 @@ void loop()
 
     case (2):
 
-      Serial.println("Song 2");
-      sizeof_music = sizeof(StarWars_musiC) / sizeof(int);
-      while ((!testmarker))
+      Serial.println("Song 2: Mario Main Theme");
+      sizeof_music = sizeof(Mario_Main_Theme_music) / sizeof(int);
+      while ((!return_of_play_music))
       {
-        testmarker = play_music (StarWars_musiC, StarWars_delayS, sizeof_music);
-        if (testmarker)
+        return_of_play_music = play_music (Mario_Main_Theme_music, Mario_Main_Theme_delayS, sizeof_music);
+        if (return_of_play_music)
+        {
+          song = 0;
+          break;
+        }
+      }
+      break;
+
+        case (3):
+
+      Serial.println("Song 3: Mario Starman Theme");
+      sizeof_music = sizeof(Mario_Starman_Theme_musiC) / sizeof(int);
+      while ((!return_of_play_music))
+      {
+        return_of_play_music = play_music (Mario_Starman_Theme_musiC, Mario_Starman_Theme_delayS, sizeof_music);
+        if (return_of_play_music)
+        {
+          song = 0;
+          break;
+        }
+      }
+      break;
+
+
+        case (4):
+
+      Serial.println("Song 4: Axel F");
+      sizeof_music = sizeof(Axel_F_musiC) / sizeof(int);
+      while ((!return_of_play_music))
+      {
+        return_of_play_music = play_music (Axel_F_musiC, Axel_F_delayS, sizeof_music);
+        if (return_of_play_music)
+        {
+          song = 0;
+          break;
+        }
+      }
+      break;
+
+
+        case (5):
+
+      Serial.println("Song 5: Davy Jones Theme");
+      sizeof_music = sizeof(Davy_Jones_musiC) / sizeof(int);
+      while ((!return_of_play_music))
+      {
+        return_of_play_music = play_music (Davy_Jones_musiC, Davy_Jones_delayS, sizeof_music);
+        if (return_of_play_music)
+        {
+          song = 0;
+          break;
+        }
+      }
+      break;
+
+
+        case (6):
+
+      Serial.println("Song 6: Pirates of the Caribbean Theme");
+      sizeof_music = sizeof(Pirates_Of_The_Caribbean_musiC ) / sizeof(int);
+      while ((!return_of_play_music))
+      {
+        return_of_play_music = play_music (Pirates_Of_The_Caribbean_musiC , Pirates_Of_The_Caribbean_delayS , sizeof_music);
+        if (return_of_play_music)
         {
           song = 0;
           break;
