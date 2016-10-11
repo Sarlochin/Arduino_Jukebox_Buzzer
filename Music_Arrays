@@ -103,3 +103,14 @@ int Pirates_Of_The_Caribbean_delayS [] = {
   };
   
   
+  //Happy Birthday
+  int Happy_Birthday_musiC[] = {
+  G4, G4, A4, G4, C5, B4, G4, G4, A4, G4, D5, C5, G4, G4, //Line 1
+  G5, E5, C5, C5, B4, A4, F5, F5, E5, C5, D5, C5 //Line 2  
+  };
+
+  int Happy_Birthday_delayS[] = {
+  es, s, q, q, q, h, es, s, q, q, q, h, es, s, //Line 1
+  q, q, es, s, q, q, es, s, q, q, q, hq //Line 2
+  };
+  
