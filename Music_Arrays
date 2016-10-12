@@ -116,45 +116,19 @@ int Happy_Birthday_delayS[] = {
 
 //A Team Theme
 int A_Team_musiC[] = {
-  0, C5, C5, G4, C5, pause, F4, G4, C4, pause, C5, G4, D5, C5, pause, AI4, A4, G4, F4, G4, pause, //Line 1
-  C5, C5, G4, C5, pause, E4, F4, G4, C4, pause, F4, E4, C4, F4, E4, pause, //Line 2
-  F4, E4, C4, B3, C4, pause, //Line 3 
-   C5, C5, G4, C5, pause, F4, G4, C4, pause, C5, G4, D5, C5, pause, AI4, A4, G4, F4, G4, pause, //Line 4
-  C5, C5, G4, C5, pause, E4, F4, G4, C4, pause, F4, E4, C4, F4, E4, pause, //Line 5
+  0, C5, C5, G4, C5, F4, G4, C4, pause, C5, G4, D5, C5, AI4, A4, G4, F4, G4, //Line 1
+  C5, C5, G4, C5, E4, F4, G4, C4, F4, E4, C4, F4, E4, //Line 2
+  F4, E4, C4, B3, C4, //Line 3 
+  C5, C5, G4, C5, F4, G4, C4, pause, C5, G4, D5, C5, AI4, A4, G4, F4, G4, //Line 4
+  C5, C5, G4, C5, E4, F4, G4, C4, F4, E4, C4, F4, E4, //Line 5
   F4, G4, A4, B4, C5 //Line 6
 };
 
 int A_Team_delayS[] = {
-  0, es, s, e, e, he, q, e, q, qe, q, e, e, e, he, q, es, s, s, es, h, q, //Line 1
-  es, s, e, he, q, e, q, e, h, q, e, q, e, q, q, q, //Line 2
-  e, e, e, e, h, q, //Line 3
-  es, s, e, e, he, q, e, q, qe, q, e, e, e, he, q, es, s, s, es, h, q, //Line 4
-  es, s, e, he, q, e, q, e, h, q, e, q, e, q, q, q, //Line 5
+  0, es, s, e, he, e, q, qe, q, e, e, e, he, es, s, s, es, h, //Line 1
+  es, s, e, he, e, q, e, h, e, q, e, q, q, //Line 2
+  e, e, e, e, h, //Line 3
+  es, s, e, he, e, q, qe, q, e, e, e, he, es, s, s, es, h, //Line 4
+  es, s, e, he, e, q, e, h, e, q, e, q, q, //Line 5
   q, q, e, qe, q //Line 6
 };
-
-
-//In Dreams
-int In_Dreams_musiC[] = {
-    0, C5, D5, E5, G5, D5, E5, C5, pause, E5, G5, A5, C6, B5, G5, E5, D5, C5, D5, //Line 1
-    E5, G5, D5, E5, C5, E5, G5, A5, G5, E5, D5, pause, C4, D4, //Line 2
-    E4, G4, E4, D4, C4, pause, E4, G4, A4, C5, B4, G4, //Line 3
-    E4, D4, C4, D4, E4, G4, E4, D4, C4, pause, E4, G4, //Line 4
-    A4, A4, G4, E4, D4, C4, D4, E4, pause, E4, A4, B4, //Line 5
-    C5, D5, C5, B4, G4, E4, D4, C4, D4, E4, pause, E4, A4, B4, //Line 6
-    C5, D5, C5, D5, E5, C5, A5, C5, G5, //Line 7
-    pause, F4, G4, GI4, G4, F4, DI4, F4, G4, F4, DI4, D4 //Line 8
-     
-    };
-
-int In_Dreams_delayS[] = {
-    0, e, e, q, h, e, e, h, q, e, e, qe, e, q, q, h, q ,e, e, //Line 1
-    q, h, e, e, hq, e, e, h, q, q, h, q, e, e, //Line 2
-    q, q, q, q, h, q, e, e, q, q, q, q,
-    h, q, e, e, q, q, q, q, h, q, e, e, //Line 4
-    he, e, e, e, f, e, e, f, qe, e, e, e, //Line 5
-    qe, s, s, q, q, hq, e, e, fh, e, e, e, e, //Line 6
-    h, qe, s, s, hq, e, e, qe, f, //Line 7
-    qe, s, s, qe, s, s, qe, s, s, h, q, q //Line 8
-    };
-  
