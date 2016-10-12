@@ -132,3 +132,35 @@ int A_Team_delayS[] = {
   es, s, e, he, e, q, e, h, e, q, e, q, q, //Line 5
   q, q, e, qe, q //Line 6
 };
+
+
+//In Dreams
+int In_Dreams_musiC[] = {
+    0, C5, D5, E5, G5, D5, E5, C5, pause, E5, G5, A5, C6, B5, G5, E5, D5, C5, D5, //Line 1
+    E5, G5, D5, E5, C5, E5, G5, A5, G5, E5, D5, pause, C4, D4, //Line 2
+    E4, G4, E4, D4, C4, pause, E4, G4, A4, C5, B4, G4, //Line 3
+    E4, D4, C4, D4, E4, G4, E4, D4, C4, pause, E4, G4, //Line 4
+    A4, A4, G4, E4, D4, C4, D4, E4, B3, A3, pause, E4, A4, B4, //Line 5
+    C5, D5, C5, B4, G4, E4, D4, C4, D4, E4, B3, A3, pause, E4, A4, B4, //Line 6
+    C5, D5, C5, D5, E5, C5, A4, C5, G4, //Line 7 
+    pause, F4, G4, GI4, G4, F4, DI4, F4, G4, F4, DI4, D4, //Line 8
+    C4, AI3, AI3, AI3, C4, pause, F4, G4, GI4, AI4, D4, E4, //Line 9
+    FI4, A4, FI4, E4, D4, pause, FI4, A4, B4, pause, D5, CI5, A4, //Line 10
+    FI4, E4, D4, E4, FI4, A4, FI4, E4, D4, pause, D4, FI4, A4, //Line 11
+    B4, pause, B4, A4, FI4, E4, FI4, E4, D4, D4 //Line 12
+    };
+
+int In_Dreams_delayS[] = {
+    0, e, e, q, h, e, e, h, q, e, e, qe, e, q, q, h, q ,e, e, //Line 1
+    q, h, e, e, hq, e, e, h, q, q, h, q, e, e, //Line 2
+    q, q, q, q, h, q, e, e, q, q, q, q,
+    h, q, e, e, q, q, q, q, h, q, e, e, //Line 4
+    he, e, e, e, f, e, e, h, h, h, qe, e, e, e, //Line 5
+    qe, s, s, q, q, h, q, e, e, hq, h, h, e, e, e, e, //Line 6
+    h, qe, s, s, hq, e, e, qe, f, //Line 7
+    qe, s, s, qe, s, s, qe, s, s, h, q, q, //Line 8
+    h, qe, s, s, hq, e, s, s, h, q, e, e, //Line 9
+    q, q, q, q, h, q, e, e,  h, e, e, e, e, //Line 10
+    h, q, e, e, q, q, q, q, h, e, e, e, e, //Line 11
+    h, e, e, e, e, he, e, e, e, f //Line 12
+    };
