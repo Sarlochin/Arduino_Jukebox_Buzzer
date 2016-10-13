@@ -6,10 +6,16 @@
   Public: yes
   GitHub: https://github.com/Sarlochin/Arduino_Jukebox_Buzzer
   Publisher: Sarlochin
+*/
 
+
+ /* For using a 7 Segment Display use the following Pinout:
+
+      middle pin (lower side) is ground connect with 220 Ohm resistor!
+      the middle pins are ground
+      Pins are connected starting from 1 going up
 
   For using a 7 Segment Display use the following Pinout:
-
       middle pin (lower side) is ground connect with 220 Ohm resistor!
       the middle pins are ground
       Pins are connected starting from 1 going up
@@ -28,12 +34,23 @@
 #define minimal_Pitch_value -4
 #define maxiaml_Pitch_value 3
 
+
+#define using_segment_display 1
+
+
+#define minimal_Delay_value 60
+#define maximal_Delay_value 200
+
+//#define minimal_Pitch_value -4
+//#define maxiaml_Pitch_value 3
+
 //Define the Pins
 const int Poti_Speed_pin = A7;
-const int Poti_Pitch_pin = A6;
+//const int Poti_Pitch_pin = A6;
 const int start_button_Pin = 2;  //Pin for Start Button
 const int stop_button_Pin = 3;
-const int next_song_button_Pin = 5;
+const int random_song_button_Pin = 5;
+const int next_song_button_Pin = 6;
 
 
 int current_note = 0;
@@ -50,14 +67,14 @@ int return_of_play_music = 0;
 
 //Defines for Segment Display
 
-const int vll = 1; //Vertical Left Lower Segment 'a'
-const int hl = 2; //Horizontal Lower Segment 'b'
-const int vrl = 3; //Vertical Right Lower Segment  'c'
-const int dd = 4; //Decimal Dot Segment  'd'
-const int hm = 5; //Horizontal Middle Segment 'e'
-const int vlu = 6; //Vertical Left Upper Segment 'f'
-const int hu = 7; //Horizontal Upper Segment 'h'
-const int vru = 8; //Vertical Right Uper Segment 'i'
+const int vll = 53; //Vertical Left Lower Segment 'a'
+const int hl = 52; //Horizontal Lower Segment 'b'
+const int vrl = 51; //Vertical Right Lower Segment  'c'
+const int dd = 50; //Decimal Dot Segment  'd'
+const int hm = 49; //Horizontal Middle Segment 'e'
+const int vlu = 48; //Vertical Left Upper Segment 'f'
+const int hu = 47; //Horizontal Upper Segment 'h'
+const int vru = 46; //Vertical Right Uper Segment 'i'
 
 //Define the notes for the Music Array
 
@@ -173,13 +190,16 @@ const int vru = 8; //Vertical Right Uper Segment 'i'
 
 //Define the note delays
 
-#define f 1000
-#define h 500
-#define hq 750
-#define q 250
-#define qe 375
-#define e 125
-#define s 63
+#define f 1000 //2000
+#define fh 1500 //3000
+#define h 500 //1000
+#define hq 750 //1500
+#define q 250 //500
+#define qe 375 //750
+#define e 125 //250
+#define es 188 //375
+#define he 625 //1250
+#define s 63 //125
 
 
 //Star Wars Imperial March
@@ -201,7 +221,7 @@ int StarWars_delayS[] = {
 
 
 //Mario Main Music
-int Mario_Main_Theme_music[] = {
+int Mario_Main_Theme_musiC[] = {
   0, 7, E7, pause, E7, pause, C7, E7, pause, G7, pause, pause,  pause, G6, pause, pause, pause, C7, pause, pause, G6, pause, pause, E6, pause, pause, A6, pause, B6, pause, AI6, A6, pause, G6, E7, G7, A7, pause, F7, G7, pause, E7, pause, C7, D7, B6, pause, pause, C7, pause, pause, G6, pause, pause, E6, pause, pause, A6, pause, B6, pause, AI6, A6, pause, G6, E7, G7, A7, pause, F7, G7, pause, E7, pause, C7, D7, B6, pause, pause
 };
 
@@ -233,6 +253,8 @@ int Axel_F_delayS[] = {
   e, e, e, s, e, s, e, e, e, e, e, e, e, s, s, e, e, e, e, e, e, s, e, s, e, e, e, e, e, q, s, e, s, e, e,  //Line 3 low voice
   e, e, e, s, e, s, e, e, e, e, e, e, e, s, s, e, e, e, e, e, e, s, e, s, e, e, e, e, e, q, f
 }; //Line 4 low voice
+
+
 
 
 //Davy Jones Theme
@@ -297,7 +319,67 @@ int Pirates_Of_The_Caribbean_delayS [] = {
 };
 
 
+//Happy Birthday
+int Happy_Birthday_musiC[] = {
+  0, G4, G4, A4, G4, C5, B4, G4, G4, A4, G4, D5, C5, G4, G4, //Line 1
+  G5, E5, C5, C5, B4, A4, F5, F5, E5, C5, D5, C5 //Line 2  
+};
 
+int Happy_Birthday_delayS[] = {
+  0, es, s, q, q, q, h, es, s, q, q, q, h, es, s, //Line 1
+  q, q, es, s, q, q, es, s, q, q, q, hq //Line 2
+};
+
+//A Team Theme
+int A_Team_musiC[] = {
+  0, C5, C5, G4, C5, F4, G4, C4, pause, C5, G4, D5, C5, AI4, A4, G4, F4, G4, //Line 1
+  C5, C5, G4, C5, E4, F4, G4, C4, F4, E4, C4, F4, E4, //Line 2
+  F4, E4, C4, B3, C4, //Line 3 
+  C5, C5, G4, C5, F4, G4, C4, pause, C5, G4, D5, C5, AI4, A4, G4, F4, G4, //Line 4
+  C5, C5, G4, C5, E4, F4, G4, C4, F4, E4, C4, F4, E4, //Line 5
+  F4, G4, A4, B4, C5 //Line 6
+};
+
+int A_Team_delayS[] = {
+  0, es, s, e, he, e, q, qe, q, e, e, e, he, es, s, s, es, h, //Line 1
+  es, s, e, he, e, q, e, h, e, q, e, q, q, //Line 2
+  e, e, e, e, h, //Line 3
+  es, s, e, he, e, q, qe, q, e, e, e, he, es, s, s, es, h, //Line 4
+  es, s, e, he, e, q, e, h, e, q, e, q, q, //Line 5
+  q, q, e, qe, q //Line 6
+};
+
+
+//In Dreams
+int In_Dreams_musiC[] = {
+    0, C5, D5, E5, G5, D5, E5, C5, pause, E5, G5, A5, C6, B5, G5, E5, D5, C5, D5, //Line 1
+    E5, G5, D5, E5, C5, E5, G5, A5, G5, E5, D5, pause, C4, D4, //Line 2
+    E4, G4, E4, D4, C4, pause, E4, G4, A4, C5, B4, G4, //Line 3
+    E4, D4, C4, D4, E4, G4, E4, D4, C4, pause, E4, G4, //Line 4
+    A4, A4, G4, E4, D4, C4, D4, E4, B3, A3, pause, E4, A4, B4, //Line 5
+    C5, D5, C5, B4, G4, E4, D4, C4, D4, E4, B3, A3, pause, E4, A4, B4, //Line 6
+    C5, D5, C5, D5, E5, C5, A4, C5, G4, //Line 7 
+    pause, F4, G4, GI4, G4, F4, DI4, F4, G4, F4, DI4, D4, //Line 8
+    C4, AI3, AI3, AI3, C4, pause, F4, G4, GI4, AI4, D4, E4, //Line 9
+    FI4, A4, FI4, E4, D4, pause, FI4, A4, B4, pause, D5, CI5, A4, //Line 10
+    FI4, E4, D4, E4, FI4, A4, FI4, E4, D4, pause, D4, FI4, A4, //Line 11
+    B4, pause, B4, A4, FI4, E4, FI4, E4, D4, D4 //Line 12
+    };
+
+int In_Dreams_delayS[] = {
+    0, e, e, q, h, e, e, h, q, e, e, qe, e, q, q, h, q ,e, e, //Line 1
+    q, h, e, e, hq, e, e, h, q, q, h, q, e, e, //Line 2
+    q, q, q, q, h, q, e, e, q, q, q, q,
+    h, q, e, e, q, q, q, q, h, q, e, e, //Line 4
+    he, e, e, e, f, e, e, h, h, h, qe, e, e, e, //Line 5
+    qe, s, s, q, q, h, q, e, e, hq, h, h, e, e, e, e, //Line 6
+    h, qe, s, s, hq, e, e, qe, f, //Line 7
+    qe, s, s, qe, s, s, qe, s, s, h, q, q, //Line 8
+    h, qe, s, s, hq, e, s, s, h, q, e, e, //Line 9
+    q, q, q, q, h, q, e, e,  h, e, e, e, e, //Line 10
+    h, q, e, e, q, q, q, q, h, e, e, e, e, //Line 11
+    h, e, e, e, e, he, e, e, e, f //Line 12
+    };
 
 
 int song = 0;
@@ -312,6 +394,7 @@ void setup()
   pinMode(start_button_Pin, INPUT);
   pinMode(stop_button_Pin, INPUT);
   pinMode(next_song_button_Pin, INPUT);
+  pinMode(random_song_button_Pin, INPUT);
 
   if (using_segment_display)
   {
@@ -336,9 +419,24 @@ void loop()
   if (digitalRead(start_button_Pin) == HIGH)
   {
     song = prev_song;
+    /*song = prev_song;
+>>>>>>> refs/remotes/origin/Rainer
     while (song == prev_song)
     {
       song = random(1, 7);
+    }
+<<<<<<< HEAD
+=======
+    prev_song = song;*/
+
+    song = 1;
+  }
+  if(digitalRead(next_song_button_Pin) == HIGH)
+  {
+    song = prev_song;
+    while(song == prev_song)
+    {
+      song++;
     }
     prev_song = song;
   }
@@ -378,10 +476,11 @@ void loop()
       Serial.println("Song 2: Mario Main Theme");
       print_number_on_segment_display (song);
 
-      sizeof_music = sizeof(Mario_Main_Theme_music) / sizeof(int);
+
+      sizeof_music = sizeof(Mario_Main_Theme_musiC) / sizeof(int);
       while ((!return_of_play_music))
       {
-        return_of_play_music = play_music (Mario_Main_Theme_music, Mario_Main_Theme_delayS, sizeof_music);
+        return_of_play_music = play_music (Mario_Main_Theme_musiC, Mario_Main_Theme_delayS, sizeof_music);
         if (return_of_play_music)
         {
           if (return_of_play_music == 2)
@@ -491,6 +590,75 @@ void loop()
       }
       break;
 
+    case (7):
+
+      Serial.println("Song 4: Happy Birthday");
+      print_number_on_segment_display (song);
+
+      sizeof_music = sizeof(Happy_Birthday_musiC) / sizeof(int);
+      while ((!return_of_play_music))
+      {
+        return_of_play_music = play_music (Happy_Birthday_musiC, Happy_Birthday_delayS, sizeof_music);
+        if (return_of_play_music)
+        {
+          if (return_of_play_music == 2)
+          {
+            return_of_play_music = 0;
+            break;
+          } else {
+            song = 0;
+            break;
+          }
+        }
+      }
+      break;
+
+    case (8):
+
+      Serial.println("Song 5: A Team");
+      print_number_on_segment_display (song);
+
+      sizeof_music = sizeof(A_Team_musiC) / sizeof(int);
+      while ((!return_of_play_music))
+      {
+        return_of_play_music = play_music (A_Team_musiC, A_Team_delayS, sizeof_music);
+        if (return_of_play_music)
+        {
+          if (return_of_play_music == 2)
+          {
+            return_of_play_music = 0;
+            break;
+          } else {
+            song = 0;
+            break;
+          }
+        }
+      }
+      break;
+
+    case (9):
+
+      Serial.println("Song 2: In Dreams");
+      print_number_on_segment_display (song);
+
+      sizeof_music = sizeof(In_Dreams_musiC) / sizeof(int);
+      while ((!return_of_play_music))
+      {
+        return_of_play_music = play_music (In_Dreams_musiC, In_Dreams_delayS, sizeof_music);
+        if (return_of_play_music)
+        {
+          if (return_of_play_music == 2)
+          {
+            return_of_play_music = 0;
+            break;
+          } else {
+            song = 0;
+            break;
+          }
+        }
+      }
+      break;
+      
     default:
       song = 0;
       break;
@@ -527,6 +695,35 @@ int play_music (int musiC[], int delayS[], int music_length)
   Serial.print("OKTAVE = ");
   Serial.println(oktave);
 
+  // note_duration = (delayS[current_note] + ((analogRead(Poti_Speed_pin) >> 2) - delay_decrementer)); //Read the delay value from the Potentiometer (returns value from 0-1023 converted to the range from 0-255)
+
+  bpm = map((analogRead(Poti_Speed_pin)), 0, 1023, minimal_Delay_value, maximal_Delay_value);
+
+  note_duration = (bpm / 60) * delayS[current_note];
+
+  if (note_duration <= 10)
+  {
+    note_duration = 10;
+  }
+
+  delay_between_notes = (note_duration + (note_duration >> 3));
+
+/* Currently not Working
+  oktave = map((analogRead(Poti_Pitch_pin)), 0, 1023, minimal_Pitch_value, maxiaml_Pitch_value);
+  Serial.print("OKTAVE = ");
+  Serial.println(oktave);
+  note_pitch = musiC[current_note] + (oktave * 260);
+  if (note_pitch <= 16)
+  {
+    note_pitch = 16;
+  }
+  if (note_pitch >= 7902)
+  {
+    note_pitch = 7902;
+  }
+  Serial.print("Pitch = ");
+  Serial.println(note_pitch);
+*/
 
   note_pitch = musiC[current_note] + (oktave * 260);
 
@@ -542,7 +739,6 @@ int play_music (int musiC[], int delayS[], int music_length)
 
   Serial.print("Pitch = ");
   Serial.println(note_pitch);
-*/
 
 
   if (!tone_marker)
@@ -559,7 +755,7 @@ int play_music (int musiC[], int delayS[], int music_length)
 
   }
 
-  if ((digitalRead(next_song_button_Pin) == HIGH))
+  if ((digitalRead(random_song_button_Pin) == HIGH))
   {
     current_note = 0;
     song = random(1, 7);
