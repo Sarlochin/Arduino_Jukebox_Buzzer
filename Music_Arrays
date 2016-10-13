@@ -164,3 +164,23 @@ int In_Dreams_delayS[] = {
     h, q, e, e, q, q, q, q, h, e, e, e, e, //Line 11
     h, e, e, e, e, he, e, e, e, f //Line 12
     };
+    
+    
+ //Fade - Alan Walker
+int Fade_musiC[] = {
+  0, FI5, FI5, FI5, AI5, DI6, DI6, DI6, CI6, AI5, AI5, AI5, AI5, F5, F5, F5, F5, //Line 1  
+  FI5, FI5, FI5, AI5, DI6, DI6, DI6, CI6, AI5, AI5, AI5, AI5, F5, F5, F5, F5, //Line 2
+  FI6, FI6, FI6, FI6, FI6, FI6, AI6, AI6, AI6, AI6, DI7, DI7, DI7, DI7, DI7, DI7, CI7, CI7, AI6, AI6, AI6, AI6, AI6, AI6, AI6, AI6, AI6, AI6, F6, F6, F6, F6, F6, F6, F6, F6, //Line 3
+  FI6, FI6, FI6, FI6, FI6, FI6, AI6, AI6, AI6, AI6, DI7, DI7, DI7, DI7, DI7, DI7, CI7, CI7, AI6, AI6, AI6, AI6, AI6, AI6, AI6, AI6, AI6, AI6, F6, F6, F6, F6, F6, F6, F6, F6, //Line 4
+  FI6, FI6, FI6, FI6, FI6, FI6, AI6, AI6, AI6, AI6, DI7, DI7, DI7, DI7, DI7, DI7, CI7, CI7, AI6, AI6, AI6, AI6, AI6, AI6, AI6, AI6, AI6, AI6, F6, F6, F6, F6, F6, F6, F6, F6, //Line 5
+  FI6, FI6, FI6, AI6, DI7, DI7, DI7, CI7, AI6, AI6, AI6, AI6, AI6, AI6, AI6, F6, F6, F6, F6, F6, F6, F6, F6, pause, FI6, FI6, FI6, AI6, DI7, DI7, DI7, CI7, AI6, AI6, AI6 //Line 6
+  };
+
+int Fade_delayS[] = {
+  0, q, q, q, q, q, q, q, q, q, q, q, q, q, q, q, q, //Line 1 
+  q, q, q, q, q, q, q, q, q, q, q, q, q, q, q, q, //Line 2
+  e, e, e, e, e, e, s, s, s, s, e, e, e, e, e, e, e, e, e, e, e, e, e, e, s, s, s, s, e, e, e, e, e, e, e, e, //Line 3
+  e, e, e, e, e, e, s, s, s, s, e, e, e, e, e, e, e, e, e, e, e, e, e, e, s, s, s, s, e, e, e, e, e, e, e, e, //Line 4
+  e, e, e, e, e, e, s, s, s, s, e, e, e, e, e, e, e, e, e, e, e, e, e, e, s, s, s, s, e, e, e, e, e, e, e, e, //Line 5
+  q, q, q, q, q, q, q, q, q, q, q, s, s, s, s, e, e, e, e, e, e, e, e, q, q, q, q, q, q, q, q, q, q, q, q 
+  };
